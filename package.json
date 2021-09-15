@@ -4,9 +4,10 @@
   "description": "An area to play around and learn SQL",
   "main": "index.js",
   "scripts": {
-    "run": "node chalk/index.js",
-    "start": "nodemon --delay 10 SQL/index.js",
+    "run": "node Linked_List/index.js",
+    "start": "nodemon --delay 10 index.js",
 
+    "sql": "nodemon --delay 10 SQL/index.js",
     "chalk" : "node chalk/index.js",
 
     "test": "jest",
