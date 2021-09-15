@@ -1,5 +1,4 @@
 // Doubly Linked List.
-
 class Node {
   constructor(value=null, previous=undefined) {
     this.value = value;
@@ -25,17 +24,16 @@ function printLinkedList(rootNode) {
 }
 
 
-// ============================================================
+// ======================   QUESTIONS   ==========================
+
 
 // Question: Linked List Ordering.
 createLinkedList(null, [7,23,91,4,16,32,4,73]).then(({root, node}) => {
   const makeMiddle = 31;
   let smaller = [], larger = [];
-  let all = [];
 
   node = root;
   while (node) {
-    all.push(node.value);
     node.value > makeMiddle ? larger.push(node.value) : smaller.push(node.value);
     node = node.next;
   }
@@ -59,7 +57,6 @@ createLinkedList(null, [1,1,1,1,2,2,3,4,5,5,5]).then(({root, node}) => {
   }
   printLinkedList(root); // 1,2,3,4,5
 })
-
 
 
 
