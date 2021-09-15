@@ -1,0 +1,25 @@
+{
+  "name": "sql_playground",
+  "version": "1.0.0",
+  "description": "An area to play around and learn SQL",
+  "main": "index.js",
+  "scripts": {
+    "run": "node chalk/index.js",
+    "start": "nodemon --delay 10 SQL/index.js",
+
+    "chalk" : "node chalk/index.js",
+
+    "test": "jest",
+    "test:report": "jest --coverage=true"
+  },
+  "author": "BenHinson",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "express": "^4.17.1",
+    "express-subdomain": "^1.0.5",
+    "md5": "^2.3.0",
+    "nodemon": "^2.0.12",
+    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+  }
+}
