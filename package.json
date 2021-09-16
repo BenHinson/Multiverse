@@ -1,14 +1,16 @@
 {
-  "name": "sql_playground",
+  "name": "multiverse",
   "version": "1.0.0",
-  "description": "An area to play around and learn SQL",
+  "description": "Multiverse classes and learnings",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "run": "node Linked_List/index.js",
+    "run": "node moduleExporting/index.js",
     "start": "nodemon --delay 10 index.js",
 
+    "linked": "node linkedLists/index.js",
     "sql": "nodemon --delay 10 SQL/index.js",
-    "chalk" : "node chalk/index.js",
+    "chalk" : "node chalk&OS/index.js",
 
     "test": "jest",
     "test:report": "jest --coverage=true"

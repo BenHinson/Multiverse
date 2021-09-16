@@ -3,28 +3,25 @@ const subdomain = require('express-subdomain');
 const bodyParser = require("body-parser");
 const md5 = require('md5');
 
-///////////////////
+const db = require('./database.js');
 
 const app = express();
 const router = express.Router({mergeParams: true});
 
 app.use(subdomain('playground', require('./playground.js')))
-
-///////////////////
-
-const db = require('./database.js');
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var HTTP_PORT = 2053; // 8000 49152 2053 443
+///////////////////
 
-// !!!! THIS FANTASTIC WALKTHROUGH: https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
-
-// localhost:2053/api/users
-// playground.nanode.one/api/users
-
+var HTTP_PORT = 2053; // 8000 2053 443
 app.listen(HTTP_PORT, () => {console.log(`Server running on port: ${HTTP_PORT}`)});
+
+// ! https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
+
+// ? localhost:2053/api/users
+// ? playground.nanode.one/api/users
+// This server is accessible via playground.nanode.one via a reverse proxy on the nanode server that points towards this localhost.
 
 
 app.get('/api/users', (req, res, next) => {
