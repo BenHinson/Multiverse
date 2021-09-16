@@ -5,13 +5,16 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "run": "node moduleExporting/index.js",
+    "run": "node classes/index.js",
     "start": "nodemon --delay 10 index.js",
 
+    "classInheritance": "node classInheritance/index.js",
+    "classes": "node classes/index.js",
+    "modules": "node moduleExporting/index.js",
     "linked": "node linkedLists/index.js",
     "sql": "nodemon --delay 10 SQL/index.js",
-    "chalk" : "node chalk&OS/index.js",
-
+    "chalk": "node chalk&OS/index.js",
+    
     "test": "jest",
     "test:report": "jest --coverage=true"
   },
@@ -24,5 +27,9 @@
     "md5": "^2.3.0",
     "nodemon": "^2.0.12",
     "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "jest": "^27.2.0"
   }
 }
