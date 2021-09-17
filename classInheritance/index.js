@@ -24,7 +24,7 @@ class KomodoDragon extends Animal {
     this.venom = 'poisonous';
     this.humansEaten = 0;
   }
-  breathFire() { throw new Error('A Komodo Dragon cannot breathe fire...') }
+  breatheFire() { throw new Error('A Komodo Dragon cannot breathe fire...') }
   venomousBite(enemy) { enemy.bite(this.venom) }
   eatHuman() { this.humansEaten += 1; }
 }
