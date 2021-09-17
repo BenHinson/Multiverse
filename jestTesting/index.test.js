@@ -5,6 +5,9 @@ const {Failed, Passed, objectToCompare, sumOfOdd, waysToMake} = require('./testF
 test('Ways to make a number via addition, with only positive inputs. Allowing for multiple number uses.', () => {
   expect(waysToMake(4, [2,1])).toBe(3);
   expect(waysToMake(8, [3,2,1])).toBe(10);
+  expect(waysToMake(0, [3,2,1])).toBe(0);
+  expect(waysToMake(1, [3,2,1])).toBe(1);
+  expect(waysToMake(2, [3,2,1])).toBe(2);
 })
 
 

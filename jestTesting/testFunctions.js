@@ -1,20 +1,10 @@
-waysToMake = (target, nums, ways=[]) => {
-  nums.sort();
-
-  checker = (total=0, method=[]) => {
-    nums.forEach(number => {
-      if (number>method[method.length-1]) {return};
-      let newTotal = total+number;
-      let newMethod = [...method, number];
-
-      if (newTotal > target) {return}
-      else if (newTotal === target) { ways.push(newMethod); }
-      else {checker(newTotal, newMethod)}
-    })
+waysToMake = (target, nums, ways=0, total=0, prevNum) => {
+  for(let i=0; i<nums.length; i++) {
+    if (prevNum && nums[i]>prevNum) {continue;}
+    if (total+nums[i] === target) {ways++;}
+    else if (total+nums[i] < target) {ways += waysToMake(target, nums, 0, total+nums[i], nums[i])};
   }
-  checker();
-
-  return ways.length;
+  return ways;
 }
 
 // ==================
@@ -42,3 +32,60 @@ module.exports = {
   waysToMake,
   sumOfOdd: (numbers) => { return numbers.reduce((a, b) => a + (b%2 ? b : 0), 0) },
 }
+
+
+
+
+
+// waysToMake = (target, nums, ways=0, total=0, prevNum) => {
+//   for(let i=0; i<nums.length; i++) {
+//     if (prevNum && nums[i]>prevNum) {continue;}
+//     if (total+nums[i] === target) {ways++;}
+//     else if (total+nums[i] < target) {ways += waysToMake(target, nums, 0, total+nums[i], nums[i])};
+//   }
+//   return ways;
+// }
+
+// waysToMake = (target, nums) => {
+//   checker = (ways=0, total=0, preNum) => {
+//     for(let i=0; i<nums.length; i++) {
+//       if (preNum && nums[i]>preNum) {continue;}
+//       if (total+nums[i] === target) {ways++;}
+//       if (total+nums[i] < target) {ways += checker(0, total+nums[i], nums[i])};
+//     }
+//     return ways;
+//   }
+//   return checker();
+// }
+
+
+// waysToMake = (target, nums, ways=0) => {
+//   checker = (total=0, preNum) => {
+//     nums.forEach(number => {
+//       if (preNum && number>preNum) {return};
+//       if (total+number === target) {return ways++;}
+//       if (total+number < target) {checker(total+number, number)};
+//     })
+//   }
+//   checker();
+//   return ways;
+// }
+
+
+
+// waysToMake = (target, nums, ways=[]) => {
+//   checker = (total=0, method=[]) => {
+//     nums.forEach(number => {
+//       if (number>method[method.length-1]) {return};
+//       let newTotal = total+number;
+//       let newMethod = [...method, number];
+
+//       if (newTotal > target) {return}
+//       else if (newTotal === target) { ways.push(newMethod); }
+//       else {checker(newTotal, newMethod)}
+//     })
+//   }
+//   checker();
+
+//   return ways.length;
+// }
