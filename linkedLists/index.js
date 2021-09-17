@@ -20,7 +20,7 @@ async function createLinkedList(start=null, values=[]) {
 function printLinkedList(rootNode) {
   let order = [];
   while (rootNode) { order.push(rootNode.value); rootNode = rootNode.next; }
-  // console.log(order);
+  console.log(order);
   return order;
 }
 

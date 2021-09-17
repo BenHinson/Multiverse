@@ -1,18 +1,17 @@
-let objectToCompare = {
-  name: {
-    'first': 'Greggor',
-    'second': 'Clegane'
-  },
-}
+const {Failed, Passed, objectToCompare, sumOfOdd, waysToMake} = require('./testFunctions');
 
-class Failed {
-  constructor(age) {
-    if (age < 0) { throw new Error('My Expected Error Message') };
-  }
-}
+// ============================
 
-sumOfOdd = (numbers) => { return numbers.reduce((a, b) => a + (b%2 ? b : 0), 0) }
+test('Ways to make a number via addition, with only positive inputs. Allowing for multiple number uses.', () => {
+  expect(waysToMake(4, [2,1])).toBe(3);
+  expect(waysToMake(8, [3,2,1])).toBe(10);
+})
 
+
+test('Correct Class Construction', () => {
+  let passedClass = new Passed(['Tyrian', 'John', 'Henry'])
+  expect(passedClass.names).toEqual(['Tyrian', 'John', 'Henry'])
+})
 
 test('Compare Objects', () => {
   expect(objectToCompare).toMatchObject(objectToCompare);
@@ -26,5 +25,5 @@ test('To Throw Error', () => {
   expect(() => new Failed(-5)).toThrow(expectedError);
 })
 test('Adding Only Odd Numbers together', () => {
-  expect(sumOfOdd([1,2,3,4,5,6])).toBe(9);
+  expect(sumOfOdd([1,2,3,4,5,6])).toBe(9);  // x === x
 })
