@@ -16,6 +16,7 @@
     "chalk": "node chalk&OS/index.js",
     
     "test": "jest",
+    "test2": "jest OOPAssignment",
     "test:report": "jest --coverage=true"
   },
   "author": "BenHinson",
