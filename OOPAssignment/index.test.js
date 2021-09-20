@@ -1,4 +1,3 @@
-const { text } = require('express');
 const {Forum, User, Admin} = require('./index');
 
 let forum, user, admin, post, poll, comment;

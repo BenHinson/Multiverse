@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "run": "node classes/index.js",
-    "start": "nodemon --delay 10 index.js",
+    "run": "node index.js",
+    "start": "nodemon --delay 10 OOPServer/server.js",
 
     "classInheritance": "node classInheritance/index.js",
     "classes": "node classes/index.js",
@@ -14,9 +14,9 @@
     "linked": "node linkedLists/index.js",
     "sql": "nodemon --delay 10 SQL/index.js",
     "chalk": "node chalk&OS/index.js",
-    
+
     "test": "jest",
-    "test2": "jest OOPAssignment",
+    "testOOP": "jest OOPAssignment",
     "test:report": "jest --coverage=true"
   },
   "author": "BenHinson",
@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "express-subdomain": "^1.0.5",
     "md5": "^2.3.0",
+    "nanoid": "^3.1.25",
     "nodemon": "^2.0.12",
     "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
   },
