@@ -37,7 +37,6 @@ app.get('/r/:forum', (req, res) => {
 
 app.get('/u/:user', (req, res) => {
   const wantedUser = (req.params.user).toLowerCase();
-
   return res.json(
     Users[wantedUser]
       ? {
