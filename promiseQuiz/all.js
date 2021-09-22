@@ -93,11 +93,11 @@ function qNine () {
 ///////////////////////////////
 
 // qOne();
-// qTwo();
+qTwo();
 // qThree();
 // qFour();
 // qFive();
 // qSix();
 // qSeven();
 // qEight();
-qNine();
+// qNine();

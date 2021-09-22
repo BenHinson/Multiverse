@@ -30,3 +30,14 @@ PWD_foreach = async(arr, delay) => { // forEach does NOT work. All number are pr
 PWD_then([1,2,3,4,5,6,7,8,9], 500);
 PWD_nonthen([1,2,3,4,5,6,7,8,9], 500);
 PWD_foreach([1,2,3,4,5,6,7,8,9], 500);
+
+
+////////////////////////////////////////////////////////////////
+
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+(checkApiRead = async() => {
+  console.time('nanodeFetch')
+  console.log(await(await fetch('https://nanode.one/check?details=true')).json())
+  console.timeEnd('nanodeFetch')
+})()

@@ -2,3 +2,4 @@ node_modules/
 C#/bin
 C#/obj
 .vscode
+*.sqlite

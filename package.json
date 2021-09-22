@@ -6,13 +6,14 @@
   "type": "commonjs",
   "scripts": {
     "run": "node index.js",
-    "start": "nodemon --delay 10 OOPServer/server.js",
+    "start": "nodemon --delay 10 ORMSequelize/sandbox.js",
 
+    "oopServer": "OOPServer/server.js",
     "classInheritance": "node classInheritance/index.js",
     "classes": "node classes/index.js",
     "modules": "node moduleExporting/index.js",
     "linked": "node linkedLists/index.js",
-    "sql": "nodemon --delay 10 SQL/index.js",
+    "sqlServer": "nodemon --delay 10 SQLServer/index.js",
     "chalk": "node chalk&OS/index.js",
 
     "test": "jest",
@@ -27,7 +28,9 @@
     "express-subdomain": "^1.0.5",
     "md5": "^2.3.0",
     "nanoid": "^3.1.25",
+    "node-fetch": "^3.0.0",
     "nodemon": "^2.0.12",
+    "sequelize": "^6.6.5",
     "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
   },
   "devDependencies": {

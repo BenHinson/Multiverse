@@ -1,7 +1,6 @@
 const express = require("express");
 const subdomain = require('express-subdomain');
 const bodyParser = require("body-parser");
-const md5 = require('md5');
 
 const db = require('./database.js');
 
@@ -60,7 +59,7 @@ app.post('/api/user/', (req, res, next) => {
     let data = {
         name: req.body.name,
         email: req.body.email,
-        password: md5(req.body.password)
+        password: req.body.password
     }
     const sql = 'INSERT INTO user (name, email, password) VALUES (?,?,?)';
     const params = [data.name, data.email, data.password]
@@ -79,7 +78,7 @@ app.patch('/api/user/:id', (req, res, next) => {
     const data = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password ? md5(req.body.password) : null
+        password: req.body.password || null
     }
     db.run(
         `UPDATE user set
