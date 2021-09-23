@@ -1,10 +1,10 @@
 const sequelize = require('./database');
-const {City, Landmark} = require('./objects');
+const {City, Landmark} = require('./models');
 
 setupDB = async() => {
   City.hasMany(Landmark);
   Landmark.belongsTo(City);
-  await sequelize.sync();
+  await sequelize.sync(); // force:true   (resets db each run)
 }
 
 sandbox = async() => {

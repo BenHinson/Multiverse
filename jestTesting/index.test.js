@@ -2,6 +2,14 @@ const {Failed, Passed, objectToCompare, sumOfOdd, waysToMake} = require('./testF
 
 // ============================
 
+// github1s.com
+  // testing hooks
+  // describe
+  // beforeAll
+  // beforeEach
+
+// ============================
+
 test('Ways to make a number via addition, with only positive inputs. Allowing for multiple number uses.', () => {
   expect(waysToMake(4, [2,1])).toBe(3);
   expect(waysToMake(8, [3,2,1])).toBe(10);
