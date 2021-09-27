@@ -38,7 +38,7 @@ setupDB = async() => {
     screeningId: (await Screenings.findAll({where: {
       movieId: (await Movies.findAll({where: {
         title: 'No Time To Die'
-      }})).map(a => a.dataValues.id)
+      }})).map(a => a.dataValues.id),
     }})).map(a => a.dataValues.id)
   }})).map(a => a.dataValues.email);
   

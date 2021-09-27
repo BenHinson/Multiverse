@@ -27,12 +27,6 @@ app.get('/flipcoin', (req, res, next) => {
 })
 
 
-// app.post('sudoku', (req, res, next) => {
-//     const problem = ;
-// })
-
-
-
 app.get('/api/users', (req, res, next) => {
     const sql = 'SELECT * from user';
     const params = [];
@@ -128,19 +122,3 @@ app.use(function(req, res) { res.status(400) });
 playgroundRouter.get('/example', function(req, res) {
     res.sendFile('./playground.html', {root: __dirname});
 })
-
-
-
-
-
-const sudokuProblem = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-];

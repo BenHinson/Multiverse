@@ -8,6 +8,8 @@
     "run": "node index.js",
     "start": "nodemon --delay 10 SQL/ORM_No_Sequelize/sandbox.js",
 
+    "RESTServer": "nodemon --delay 10 REST/index.js",
+
     "ORM_No_Sequelize": "node SQL/ORM_No_Sequelize/sandbox.js",
     "ORMAssignment": "node SQL/ORMAssignment/sandbox.js",
     "ORMSequelize": "node SQL/ORMSequelize/sandbox.js",
@@ -23,6 +25,7 @@
 
     "test": "jest",
     "testOOP": "jest Objects/OOPAssignment",
+    "testREST": "jest REST/index.js",
     "test:report": "jest --coverage=true"
   },
   "author": "BenHinson",
