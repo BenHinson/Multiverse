@@ -3,6 +3,7 @@ const subdomain = require('express-subdomain');
 
 const sandbox = require('./initialise.js');
 const { Companies, Locations, Menus, Meals } = require("./models.js");
+const { checkUser } = require('./auth');
 
 const app = express();
 const playgroundRouter = express.Router({mergeParams: true});
@@ -67,7 +68,7 @@ app.get('/meals/:menuId', async(req, res) => { // Get all of a specific menu’s
 
 
 
-app.post('/companies', async(req, res) => { // Create a company
+app.post('/companies', checkUser, async(req, res) => { // Create a company
   const {name, logoURL} = req.body;
   if (!name || !logoURL || typeof name !== 'string' || typeof logoURL !== 'string') {
     return res.status(400).json({'error': 'Please provide a name and logoURL'})
@@ -81,7 +82,7 @@ app.post('/companies', async(req, res) => { // Create a company
     });
   }).catch((err) => {res.json({'message': 'failed', 'error': err})})
 })
-app.post('/restaurants/:companyId', async(req, res) => { // Create a restaurant for a company
+app.post('/restaurants/:companyId', checkUser, async(req, res) => { // Create a restaurant for a company
   const {location, capacity, manager} = req.body;
   if (!location || !capacity || !manager) {
     return res.status(400).json({'error': 'Please provide a location, the capacity and manager'})
@@ -97,7 +98,7 @@ app.post('/restaurants/:companyId', async(req, res) => { // Create a restaurant 
     });
   }).catch((err) => {res.json({'message': 'failed', 'error': err})});
 })
-app.post('/menus/:companyId', async(req, res) => { // Create a menu for a company
+app.post('/menus/:companyId', checkUser, async(req, res) => { // Create a menu for a company
   const {title} = req.body;
   if (!title || typeof title !== 'string') {
     return res.status(400).json({'error': 'Please provide a location, the capacity and manager'})
@@ -113,7 +114,7 @@ app.post('/menus/:companyId', async(req, res) => { // Create a menu for a compan
     });
   }).catch((err) => {res.json({'message': 'failed', 'error': err})});
 })
-app.post('/meals/:menuId', async(req, res) => {
+app.post('/meals/:menuId', checkUser, async(req, res) => {
   const {name} = req.body;
   if (!name || typeof name !== 'string') {
     return res.status(400).json({'error': 'Please provide a name for the meal'})
@@ -132,7 +133,7 @@ app.post('/meals/:menuId', async(req, res) => {
 
 
 
-app.delete('/company/:companyId', async(req, res) => { // Delete a company by their id.
+app.delete('/company/:companyId', checkUser, async(req, res) => { // Delete a company by their id.
   const companyId = req.params.companyId;
   Companies.destroy({where: {id: companyId}}).then((e) => {
     return res.json({
@@ -140,7 +141,7 @@ app.delete('/company/:companyId', async(req, res) => { // Delete a company by th
     })
   }).catch((err) => res.json({'message': 'failed', 'error': err}));
 })
-app.delete('/restaurants/:restaurantId', async(req, res) => { // Delete a company by their id.
+app.delete('/restaurants/:restaurantId', checkUser, async(req, res) => { // Delete a company by their id.
   const restaurantId = req.params.restaurantId;
   Locations.destroy({where: {id: restaurantId}}).then((e) => {
     return res.json({
@@ -148,7 +149,7 @@ app.delete('/restaurants/:restaurantId', async(req, res) => { // Delete a compan
     })
   }).catch((err) => res.json({'message': 'failed', 'error': err}));
 })
-app.delete('/menu/:menuId', async(req, res) => { // Delete a menu
+app.delete('/menu/:menuId', checkUser, async(req, res) => { // Delete a menu
   const menuId = req.params.menuId;
   Menus.destroy({where: {id: menuId}}).then((e) => {
     return res.json({
@@ -159,7 +160,7 @@ app.delete('/menu/:menuId', async(req, res) => { // Delete a menu
 
 
 
-app.patch('/company/:companyId', async(req, res) => { // Replace a specific company
+app.patch('/company/:companyId', checkUser, async(req, res) => { // Replace a specific company
   const companyId = req.params.companyId;
   const {newName, newLogoURL} = req.body;
   if (typeof newName !== 'string' || typeof newLogoURL !== 'string') { return res.status(400).json({'error': 'Please provide a valid new name and logoURL for the company'}) }

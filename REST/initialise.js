@@ -11,5 +11,5 @@ const {Companies, Locations, Menus, Meals} = require('./models');
   Meals.belongsTo(Menus);
 
   // await sequelize.sync({ force:true }); // force:true   (resets db each run)
-  await sequelize.sync(); // force:true   (resets db each run)
+  await sequelize.sync();
 })()

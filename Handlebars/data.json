@@ -1,0 +1,12 @@
+{
+  "restaurants": [
+      {
+          "name": "Theo's Pizza",
+          "image": "http://theos.image.jpg"
+      },
+      {
+          "name": "Patsies Pastries",
+          "image": "http://patsies.image.jpg"
+      }
+  ]
+}
