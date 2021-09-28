@@ -31,8 +31,10 @@
   "author": "BenHinson",
   "license": "UNLICENSED",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "chalk": "^4.1.2",
     "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
     "express-subdomain": "^1.0.5",
     "handlebars": "^4.7.7",
     "md5": "^2.3.0",

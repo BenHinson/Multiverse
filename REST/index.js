@@ -1,5 +1,10 @@
 const express = require("express");
 const subdomain = require('express-subdomain');
+const path= require('path');
+
+const Handlebars = require("handlebars");
+const expressHandlebars = require("express-handlebars");
+const { allowInsecurePrototypeAccess } = require("@handlebars/allow-prototype-access");
 
 const sandbox = require('./initialise.js');
 const { Companies, Locations, Menus, Meals } = require("./models.js");
@@ -12,9 +17,27 @@ app.use(subdomain('playground', playgroundRouter))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const handlebars = expressHandlebars({handlebars: allowInsecurePrototypeAccess(Handlebars)});
+app.engine("handlebars", handlebars);
+app.set('views', path.join(__dirname, 'views'))
+app.set("view engine", "handlebars");
+
 /////////////////////////////////////////////////////////
 
 app.listen(2053, () => {console.log(`Server running on port: ${2053}`)});
+
+
+
+
+app.get("/", async (req, res) => {
+    Companies.findAll().then((e) => {
+      return res.render('home', {
+        'company': e.map(e => e.dataValues)
+      });
+    }).catch((err) => res.json({'message': 'failed', 'error': err}))
+});
+
+
 
 
 app.get('/companies', async(req, res) => { // Get all companies
