@@ -14,19 +14,20 @@
     "ORMAssignment": "node SQL/ORMAssignment/sandbox.js",
     "ORMSequelize": "node SQL/ORMSequelize/sandbox.js",
     "sqlServer": "nodemon --delay 10 SQL/SQLServer/index.js",
-
     "oopServer": "node Objects/OOPServer/server.js",
+
     "classInheritance": "node Objects/classInheritance/index.js",
     "classes": "node Objects/classes/index.js",
     "linked": "node Objects/linkedLists/index.js",
-
+    
     "modules": "node Node/moduleExporting/index.js",
     "chalk": "node Node/chalk&OS/index.js",
 
     "test": "jest",
     "testOOP": "jest Objects/OOPAssignment",
     "testREST": "jest REST/index.js",
-    "test:report": "jest --coverage=true"
+    "test:report": "jest --coverage=true",
+    "mocha": "mocha REST/supertest.test.js"
   },
   "author": "BenHinson",
   "license": "UNLICENSED",
@@ -43,6 +44,8 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
-    "jest": "^27.2.0"
+    "jest": "^27.2.0",
+    "mocha": "^9.1.2",
+    "supertest": "^6.1.6"
   }
 }

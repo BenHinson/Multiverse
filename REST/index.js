@@ -69,7 +69,7 @@ app.get('/meals/:menuId', async(req, res) => { // Get all of a specific menu’s
 
 app.post('/companies', async(req, res) => { // Create a company
   const {name, logoURL} = req.body;
-  if (!name || !logoURL) {
+  if (!name || !logoURL || typeof name !== 'string' || typeof logoURL !== 'string') {
     return res.status(400).json({'error': 'Please provide a name and logoURL'})
   }
 
@@ -99,7 +99,7 @@ app.post('/restaurants/:companyId', async(req, res) => { // Create a restaurant 
 })
 app.post('/menus/:companyId', async(req, res) => { // Create a menu for a company
   const {title} = req.body;
-  if (!title) {
+  if (!title || typeof title !== 'string') {
     return res.status(400).json({'error': 'Please provide a location, the capacity and manager'})
   } else if (!req.params.companyId || !Companies.findOne({where: {id: req.params.companyId}})) {
     return res.status(400).json({'error': 'No Company id provided.'})
@@ -115,7 +115,7 @@ app.post('/menus/:companyId', async(req, res) => { // Create a menu for a compan
 })
 app.post('/meals/:menuId', async(req, res) => {
   const {name} = req.body;
-  if (!name) {
+  if (!name || typeof name !== 'string') {
     return res.status(400).json({'error': 'Please provide a name for the meal'})
   } else if (!req.params.menuId || !Menus.findOne({where: {id: req.params.menuId}})) {
     return res.status(400).json({'error': 'No Company id provided.'})
@@ -132,10 +132,9 @@ app.post('/meals/:menuId', async(req, res) => {
 
 
 
-
 app.delete('/company/:companyId', async(req, res) => { // Delete a company by their id.
   const companyId = req.params.companyId;
-  await Companies.destroy({where: {id: companyId}}).then((e) => {
+  Companies.destroy({where: {id: companyId}}).then((e) => {
     return res.json({
       'message': 'success'
     })
@@ -143,7 +142,7 @@ app.delete('/company/:companyId', async(req, res) => { // Delete a company by th
 })
 app.delete('/restaurants/:restaurantId', async(req, res) => { // Delete a company by their id.
   const restaurantId = req.params.restaurantId;
-  await Locations.destroy({where: {id: restaurantId}}).then((e) => {
+  Locations.destroy({where: {id: restaurantId}}).then((e) => {
     return res.json({
       'message': 'success'
     })
@@ -159,13 +158,13 @@ app.delete('/menu/:menuId', async(req, res) => { // Delete a menu
 })
 
 
+
 app.patch('/company/:companyId', async(req, res) => { // Replace a specific company
   const companyId = req.params.companyId;
   const {newName, newLogoURL} = req.body;
-  if (!newName) { return res.status(400).json({'error': 'Please provide a new name for the company'}) }
+  if (typeof newName !== 'string' || typeof newLogoURL !== 'string') { return res.status(400).json({'error': 'Please provide a valid new name and logoURL for the company'}) }
 
   Companies.update({name: newName, logoURL: newLogoURL}, {where: {id: companyId}}).then((e) => {
-    console.log(e);
     res.json({
       'message': 'success',
       'data': {name: newName, logoURL: newLogoURL}
@@ -178,3 +177,5 @@ app.patch('/company/:companyId', async(req, res) => { // Replace a specific comp
 app.get('/', (req, res, next) => { res.json({'message': 'success'}) });
 
 app.use(function(req, res) { res.status(400) });
+
+module.exports = app;
