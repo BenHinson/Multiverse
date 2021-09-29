@@ -29,17 +29,6 @@ app.listen(2053, () => {console.log(`Server running on port: ${2053}`)});
 
 
 
-app.get("/", async (req, res) => {
-    Companies.findAll().then((e) => {
-      return res.render('home', {
-        'company': e.map(e => e.dataValues)
-      });
-    }).catch((err) => res.json({'message': 'failed', 'error': err}))
-});
-
-
-
-
 app.get('/companies', async(req, res) => { // Get all companies
   Companies.findAll().then((e) => {
     return res.json({

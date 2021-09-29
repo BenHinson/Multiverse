@@ -1,0 +1,15 @@
+<h1>Companies</h1>
+
+<table style="width: 100%;">
+    <thead>
+        <tr><th>Name</th><th>LogoURL</th></tr>
+    </thead>
+    <tbody>
+        {{#each company}}
+            <tr onclick="window.location='http://localhost:2053/company/{{this.id}}'">
+                <td>{{this.name}}</td>
+                <td>{{this.logoURL}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

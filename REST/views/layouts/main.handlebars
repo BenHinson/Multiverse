@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Example App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies</title>
 </head>
 <body>
-
     {{{body}}}
-
 </body>
 </html>
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 5em;
+    }
+    table {
+        border-collapse: collapse;
+    }
+    table>thead {
+        height: 2em;
+        box-shadow: 0 1px #666;
+    }
+    table>thead>tr>th {
+        width: 50%;
+        text-align: left;
+    }
+    table>tbody>tr:hover:not(.noHover) {
+        background: #ebebeb;
+        cursor: pointer;
+    }
+    table>tbody>tr {
+        height: 2em;
+    }
+</style>

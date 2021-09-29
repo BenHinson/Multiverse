@@ -1,0 +1,15 @@
+<h1>Menus for - {{menu.title}}</h1>
+
+<h3>Meals</h3>
+<table style="width: 100%;">
+    <thead>
+      <tr><th>Name</th></tr>
+    </thead>
+    <tbody>
+      {{#each meal}}
+        <tr>
+          <td>{{this.name}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+</table>

@@ -8,6 +8,7 @@
     "run": "node index.js",
     "start": "nodemon --delay 10 SQL/ORM_No_Sequelize/sandbox.js",
 
+    "RESTServerHandlebars": "nodemon --delay 10 REST/handlebars.js",
     "RESTServer": "nodemon --delay 10 REST/index.js",
     "ORM_No_Sequelize": "node SQL/ORM_No_Sequelize/sandbox.js",
     "ORMAssignment": "node SQL/ORMAssignment/sandbox.js",

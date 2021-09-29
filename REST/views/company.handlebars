@@ -1,0 +1,34 @@
+<h1>Company - {{company.name}}</h1>
+
+<h5>Logo - {{company.logoURL}}</h5>
+
+<h3>Restaurants</h3>
+<table style="width: 100%;">
+    <thead>
+        <tr><th>Location</th><th>Capacity</th><th>Manager</th></tr>
+    </thead>
+    <tbody>
+        {{#each restaurant}}
+            <tr class='noHover'>
+                <td>{{this.location}}</td>
+                <td>{{this.capacity}}</td>
+                <td>{{this.manager}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<h3>Menus</h3>
+<table style="width: 100%;">
+    <thead>
+        <tr><th>Title</th></tr>
+    </thead>
+    <tbody>
+        {{#each menu}}
+            <tr onclick="window.location='http://localhost:2053/meals/{{this.id}}'">
+                <td>{{this.title}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
