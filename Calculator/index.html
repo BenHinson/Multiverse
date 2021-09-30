@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+</head>
+<body>
+  
+  <div class='calculator'>
+    <input class='answer' type='text' disabled placeholder="0" value=''>
+  
+    <div class='buttonGrid'>
+      <button calcVal='AC' class='controlBtn'>AC</button>
+      <button calcVal='()' class='controlBtn'>()</button>
+      <button class='controlBtn'>+/-</button>
+      <button value='/' class="actionBtn">÷</button>
+      
+      <button value='7'>7</button>
+      <button value='8'>8</button>
+      <button value='9'>9</button>
+      <button value='*' class="actionBtn">×</button>
+            
+      <button value='4'>4</button>
+      <button value='5'>5</button>
+      <button value='6'>6</button>
+      <button value='-' class="actionBtn">−</button>
+            
+      <button value='1'>1</button>
+      <button value='2'>2</button>
+      <button value='3'>3</button>
+      <button value='+' class="actionBtn">+</button>
+
+      <button value='0' style='grid-column: span 2'>0</button>
+      <button value='.' >.</button>
+      <button calcVal='=' class="actionBtn">=</button>
+    </div>
+  </div>
+  
+  <div class='history'>
+    <div class='previous'></div>
+    <button class='clearHistory'>Clear History</button>
+  </div>
+
+</body>
+</html>
+
+
+<script>
+  let equation = '', prevBracket = '';
+  const answer = document.querySelector('.answer');
+  const historyElem = document.querySelector('.previous');
+  const clearHistory = document.querySelector('.clearHistory');
+
+  calculate = (x) => {
+    let equals = eval(x.replace(/[^-()\d/*+.]/g, '')) || 'Err';
+    answer.value = equals;
+    equation = equals;
+    historyElem.innerHTML += `<span><small>${x}</small><b>= ${equals}</b></span>`;
+  }
+  setEquation_Answer = (equVal, ansVal) => { equation += equVal; answer.value += ansVal; }
+  clearHistory.addEventListener('click', () => { historyElem.innerHTML = ``; })
+
+
+  document.querySelectorAll('.buttonGrid>button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      let calcVal = e.target.getAttribute('calcVal');
+      if (calcVal) { return specialChar(calcVal, e.target.value); }
+
+      if (equation[equation.length - 1]?.match(/\.|\*|\/|\+|\-/) && e.target.value?.match(/\.|\*|\/|\+|\-/)) {
+        equation = equation.slice(0, -1);
+        answer.value = answer.value.slice(0, -1);
+      }
+
+      setEquation_Answer(e.target.value, e.target.innerText);
+    })
+  })
+
+  specialChar = (calcVal, value) => {
+    if (calcVal === '=') {
+      if (prevBracket === "(") {setEquation_Answer(")", ")")} 
+      calculate(equation || 'Err'); 
+    }
+    else if (calcVal === 'AC') { answer.value = ''; equation = ''; prevBracket=''; }
+    else if (calcVal === '()') {prevBracket = (prevBracket=="(" ? ")" : "("); setEquation_Answer(prevBracket, prevBracket);}
+  }
+</script>
+
+
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    font-family: system-ui;
+
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+  .history {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 502px;
+    width: 180px;
+  }
+  .previous>span { 
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid;
+    padding: 0.5em 0;
+  }
+  .previous>span>small { opacity: 0.6; }
+
+  .clearHistory {
+    font-size: 20px;
+    background: #1d87f1;
+    color: white;
+    border-radius: 5px;
+  }
+
+
+
+  .calculator {
+    display: grid;
+    grid-template-rows: 100px auto;
+    height: 500px;
+    width: 340px;
+    border-radius: 8px;
+    background-color: #747e88;
+    overflow: hidden;
+    border: 1px solid #132a3f;
+  }
+  input.answer {
+    width: 294px;
+    padding: 0 0.5em;
+    text-align: right;
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
+  }
+  input.answer::placeholder { color: white; }
+
+  .buttonGrid {
+    display: grid;
+    width: inherit;
+    grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
+    gap: 0.6%;
+    background: #667581;
+  }
+
+  button, input { border: none; }
+  button { font-size: 28px; user-select: none; }
+  button:active { opacity: 0.8; }
+
+  .controlBtn { background: #b6bec5; font-size: 24px; }
+  .actionBtn { background: #f2a13c; color: white; font-size: 32px; }
+  
+</style>

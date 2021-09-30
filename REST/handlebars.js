@@ -35,8 +35,7 @@ app.get('/companies', async (req, res) => {
         'company': e.map(e => e.dataValues)
       });
     }).catch((err) => res.json({'message': 'failed', 'error': err}))
-});
-
+})
 app.get('/company/:companyId', async(req, res) => { // Get a company by their id
   const companyId = req.params.companyId;
 
@@ -50,7 +49,6 @@ app.get('/company/:companyId', async(req, res) => { // Get a company by their id
     'menu': menuData.map(e => e.dataValues)
   });
 })
-
 app.get('/meals/:menuId', async(req, res) => { // Get all of a specific menu’s items
   const menuId = req.params.menuId;
 
@@ -63,6 +61,53 @@ app.get('/meals/:menuId', async(req, res) => { // Get all of a specific menu’s
   });
 })
 
+
+app.post('/companies', async(req, res) => { // Create a company
+  const {name, logoURL} = req.body;
+  if (!name || !logoURL || typeof name !== 'string' || typeof logoURL !== 'string') {
+    return res.status(400).json({'error': 'Please provide a name and logoURL'})
+  }
+
+  Companies.create({name, logoURL}).then((e) => {
+    res.json({
+      'message': 'success',
+      'data': {name, logoURL},
+      'id': e.dataValues.id,
+    });
+  }).catch((err) => {res.json({'message': 'failed', 'error': err})})
+})
+app.post('/restaurants/:companyId', async(req, res) => { // Create a restaurant for a company
+  const {location, capacity, manager} = req.body;
+  if (!location || !capacity || !manager) {
+    return res.status(400).json({'error': 'Please provide a location, the capacity and manager'})
+  } else if (!req.params.companyId || !Companies.findOne({where: {id: req.params.companyId}})) {
+    return res.status(400).json({'error': 'No Company id provided.'})
+  }
+
+  Locations.create({location, capacity, manager, companyId: req.params.companyId}).then((e) => {
+    res.json({
+      'message': 'success',
+      'data': {location, capacity, manager},
+      'id': e.dataValues.id,
+    });
+  }).catch((err) => {res.json({'message': 'failed', 'error': err})});
+})
+app.post('/menus/:companyId', async(req, res) => { // Create a menu for a company
+  const {title} = req.body;
+  if (!title || typeof title !== 'string') {
+    return res.status(400).json({'error': 'Please provide a location, the capacity and manager'})
+  } else if (!req.params.companyId || !Companies.findOne({where: {id: req.params.companyId}})) {
+    return res.status(400).json({'error': 'No Company id provided.'})
+  }
+
+  Menus.create({title, companyId: req.params.companyId}).then((e) => {
+    res.json({
+      'message': 'success',
+      'data': {title},
+      'id': e.dataValues.id,
+    });
+  }).catch((err) => {res.json({'message': 'failed', 'error': err})});
+})
 
 
 

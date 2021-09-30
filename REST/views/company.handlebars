@@ -2,33 +2,56 @@
 
 <h5>Logo - {{company.logoURL}}</h5>
 
-<h3>Restaurants</h3>
-<table style="width: 100%;">
-    <thead>
-        <tr><th>Location</th><th>Capacity</th><th>Manager</th></tr>
-    </thead>
-    <tbody>
-        {{#each restaurant}}
-            <tr class='noHover'>
-                <td>{{this.location}}</td>
-                <td>{{this.capacity}}</td>
-                <td>{{this.manager}}</td>
-            </tr>
-        {{/each}}
-    </tbody>
-</table>
+<section>
+    <h2>Restaurants</h2>
+    <table style="width: 100%;">
+        <thead>
+            <tr><th>Location</th><th>Capacity</th><th>Manager</th></tr>
+        </thead>
+        <tbody>
+            {{#each restaurant}}
+                <tr class='noHover'>
+                    <td>{{this.location}}</td>
+                    <td>{{this.capacity}}</td>
+                    <td>{{this.manager}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div class='createForm'>
+        <h3>Add Restaurant</h3>
+        <form action='/restaurants/{{company.id}}' method='post'>
+            <input class='userInteract' type='text' name='location' placeholder='Location...' required='true'>
+            <input class='userInteract' type='number' name='capacity' placeholder='Capacity...' required='true'>
+            <input class='userInteract' type='text' name='manager' placeholder='Manager...' required='true'>
+            <button class='userInteract' type='submit'>Submit Location</button>
+        </form>
+    </div>
+</section>
 
 
-<h3>Menus</h3>
-<table style="width: 100%;">
-    <thead>
-        <tr><th>Title</th></tr>
-    </thead>
-    <tbody>
-        {{#each menu}}
-            <tr onclick="window.location='http://localhost:2053/meals/{{this.id}}'">
-                <td>{{this.title}}</td>
-            </tr>
-        {{/each}}
-    </tbody>
-</table>
+<section>
+    <h2>Menus</h2>
+    <table style="width: 100%;">
+        <thead>
+            <tr><th>Title</th></tr>
+        </thead>
+        <tbody>
+            {{#each menu}}
+                <tr onclick="window.location='http://localhost:2053/meals/{{this.id}}'">
+                    <td>{{this.title}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div class='createForm'>
+        <h3>Add Menu</h3>
+        <form action='/menus/{{company.id}}' method='post' onclick="prevDefSubmit">
+            <input class='userInteract' type='text' name='title' placeholder='Title...' required='true'>
+            <button class='userInteract' type='submit'>Submit Menu</button>
+        </form>
+    </div>
+</section>
+

@@ -16,7 +16,19 @@
     body {
         margin: 0;
         padding: 5em;
+        font-family: system-ui;
     }
+
+    section {
+        margin: 2em 0;
+        padding: 1em;
+        border: 1px solid #666;
+        border-radius: 12px;
+    }
+    section > h2 {
+        margin: 0 0 1em;
+    }
+
     table {
         border-collapse: collapse;
     }
@@ -25,7 +37,7 @@
         box-shadow: 0 1px #666;
     }
     table>thead>tr>th {
-        width: 50%;
+        width: 30%;
         text-align: left;
     }
     table>tbody>tr:hover:not(.noHover) {
@@ -34,5 +46,36 @@
     }
     table>tbody>tr {
         height: 2em;
+    }
+</style>
+
+<style>
+    .createForm {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin-top: 3em;
+        padding-top: 1em;
+        border-top: 1px solid #666;
+    }
+    .createForm > h3 {
+        margin: 0;
+    }
+
+    .userInteract {
+        font-size: 13px;
+        letter-spacing: 1.2px;
+        text-decoration: none;
+        position: relative;
+        padding: .7em 1.2em;
+        border-radius: 6px;
+        border: 1px solid #666;
+    }
+
+    .createForm > form > button {
+        text-align: center;
+        background: #1d87f1;
+        color: white;
+        border: none;
     }
 </style>
