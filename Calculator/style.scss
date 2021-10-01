@@ -1,0 +1,92 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  font-family: system-ui;
+
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+// ======================
+
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 502px;
+  width: 180px;
+  gap: 1em;
+
+  >.previous {
+    overflow-y: auto;
+    >span {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding: 0.5em 0;
+      font-size: 24px;
+      border-bottom: 1px solid;
+
+      &:hover {i{display: block;}}
+
+      >small { opacity: 0.6; }
+      >i { display: none; position: absolute; color: red; right: 10px; font-size: 24px; cursor: pointer; }
+    }
+  }
+
+  >.clearHistory {
+    font-size: 20px;
+    background: #1d87f1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: #1971c9;
+    }
+  }
+}
+
+.calculator {
+  display: grid;
+  grid-template-rows: 100px auto;
+  height: 500px;
+  width: 340px;
+  border-radius: 8px;
+  background-color: #747e88;
+  overflow: hidden;
+  border: 1px solid #132a3f;
+
+  >input.answer {
+    width: 294px;
+    padding: 0 0.5em;
+    text-align: right;
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
+    &::placeholder { color: white; }
+  }
+
+  >.buttonGrid {
+    display: grid;
+    width: inherit;
+    grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
+    gap: 0.6%;
+    background: #667581;
+
+    >button {
+      font-size: 28px; user-select: none;
+      &:active { opacity: 0.8; }
+
+      &.controlBtn { background: #b6bec5; font-size: 24px; }
+      &.actionBtn { background: #f2a13c; color: white; font-size: 32px; }
+    }
+    
+  }
+}
+
+// ======================
+
+button, input { border: none; }

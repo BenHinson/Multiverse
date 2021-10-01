@@ -111,6 +111,16 @@ app.post('/menus/:companyId', async(req, res) => { // Create a menu for a compan
 
 
 
+app.delete('/company/:companyId', async(req, res) => { // Delete a company by their id.
+  const companyId = req.params.companyId;
+  Companies.destroy({where: {id: companyId}}).then((e) => {
+    return res.json({
+      'message': 'success'
+    })
+  }).catch((err) => res.json({'message': 'failed', 'error': err}));
+})
+
+
 
 
 

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='style.css' rel="stylesheet"></link>
   <title>Calculator</title>
 </head>
 <body>
@@ -48,116 +49,76 @@
 
 
 <script>
+
+  // TO FIX:
+  //    Double .'s  ie: 7.05. <- Shouldn't allow second dot.
+
   let equation = '', prevBracket = '';
+
   const answer = document.querySelector('.answer');
   const historyElem = document.querySelector('.previous');
-  const clearHistory = document.querySelector('.clearHistory');
 
-  calculate = (x) => {
-    let equals = eval(x.replace(/[^-()\d/*+.]/g, '')) || 'Err';
-    answer.value = equals;
-    equation = equals;
-    historyElem.innerHTML += `<span><small>${x}</small><b>= ${equals}</b></span>`;
-  }
-  setEquation_Answer = (equVal, ansVal) => { equation += equVal; answer.value += ansVal; }
-  clearHistory.addEventListener('click', () => { historyElem.innerHTML = ``; })
+  const charMap = {'*': '×', '-': '−', '+': '+', '/': '÷'};
 
+  // ======================
+
+  document.querySelector('.clearHistory').addEventListener('click', () => { historyElem.innerHTML = ``; });
+
+  document.addEventListener('keydown', (e) => {
+    e.preventDefault();
+
+    if (e.key === 'Backspace') {equation = (equation.length ? equation?.slice(0, -1) : ''); answer.value = answer.value.slice(0, -1);}
+    else if (e.keyCode === 13) { specialChar('=') }
+    else if (String(e.keyCode).match(/48|49|50|51|52|53|54|55|56|57/)) { charLogic(e.key, e.key) }
+    else if (String(e.keyCode).match(/106|107|109|110|111/)) { charLogic(e.key, charMap[e.key]) }
+  })
 
   document.querySelectorAll('.buttonGrid>button').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      let calcVal = e.target.getAttribute('calcVal');
-      if (calcVal) { return specialChar(calcVal, e.target.value); }
-
-      if (equation[equation.length - 1]?.match(/\.|\*|\/|\+|\-/) && e.target.value?.match(/\.|\*|\/|\+|\-/)) {
-        equation = equation.slice(0, -1);
-        answer.value = answer.value.slice(0, -1);
-      }
-
-      setEquation_Answer(e.target.value, e.target.innerText);
+      charLogic(e.target.value, e.target.innerText, e.target.getAttribute('calcVal'));
     })
   })
 
+  charLogic = (keyValue, textValue, calcVal=undefined) => {
+    if (answer.value === 'Err') { answer.value = '' }
+    if (keyValue?.match(/\*|\/|\+|\-/) && answer.value === '') { return; }
+    if (keyValue === '.' && answer.value === '') { setEquation_Answer('0', '0'); }
+
+    if (calcVal) { return specialChar(calcVal, keyValue); }
+
+    if (equation[equation.length - 1]?.match(/\.|\*|\/|\+|\-/) && keyValue?.match(/\.|\*|\/|\+|\-/)) {
+      equation = equation.slice(0, -1);
+      answer.value = answer.value.slice(0, -1);
+    }
+
+    setEquation_Answer(keyValue, textValue);
+  }
+
+
+
   specialChar = (calcVal, value) => {
     if (calcVal === '=') {
-      if (prevBracket === "(") {setEquation_Answer(")", ")")} 
+      if (prevBracket === "(") {setEquation_Answer(")", ")"); prevBracket=')'}
+      if (equation === '') { return; }
       calculate(equation || 'Err'); 
     }
-    else if (calcVal === 'AC') { answer.value = ''; equation = ''; prevBracket=''; }
-    else if (calcVal === '()') {prevBracket = (prevBracket=="(" ? ")" : "("); setEquation_Answer(prevBracket, prevBracket);}
-  }
-</script>
-
-
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-    font-family: system-ui;
-
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
-  }
-  .history {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 502px;
-    width: 180px;
-  }
-  .previous>span { 
-    font-size: 24px;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid;
-    padding: 0.5em 0;
-  }
-  .previous>span>small { opacity: 0.6; }
-
-  .clearHistory {
-    font-size: 20px;
-    background: #1d87f1;
-    color: white;
-    border-radius: 5px;
+    else if (calcVal === 'AC') {
+      answer.value = '';
+      equation = '';
+      prevBracket='';
+    }
+    else if (calcVal === '()') {
+      prevBracket = (prevBracket=="(" ? ")" : "(");
+      setEquation_Answer(prevBracket, prevBracket);
+    }
   }
 
-
-
-  .calculator {
-    display: grid;
-    grid-template-rows: 100px auto;
-    height: 500px;
-    width: 340px;
-    border-radius: 8px;
-    background-color: #747e88;
-    overflow: hidden;
-    border: 1px solid #132a3f;
+  calculate = (x) => {
+    let equals = eval(x.replace(/[^-()\d/*+.]/g, ''));
+    answer.value = typeof equals == 'number' ? equals : 'Err';
+    equation = equals;
+    historyElem.innerHTML += `<span><small>${x}</small><b>= ${equals}</b><i onclick='this.parentElement.remove()'>X</i></span>`;
   }
-  input.answer {
-    width: 294px;
-    padding: 0 0.5em;
-    text-align: right;
-    font-size: 48px;
-    font-weight: 400;
-    color: white;
-  }
-  input.answer::placeholder { color: white; }
-
-  .buttonGrid {
-    display: grid;
-    width: inherit;
-    grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
-    gap: 0.6%;
-    background: #667581;
-  }
-
-  button, input { border: none; }
-  button { font-size: 28px; user-select: none; }
-  button:active { opacity: 0.8; }
-
-  .controlBtn { background: #b6bec5; font-size: 24px; }
-  .actionBtn { background: #f2a13c; color: white; font-size: 32px; }
   
-</style>
+  setEquation_Answer = (equVal, ansVal) => { equation += equVal; answer.value += ansVal; }
+</script>

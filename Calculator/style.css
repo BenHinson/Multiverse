@@ -1,0 +1,155 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2em;
+  font-family: system-ui;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.history {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 502px;
+  width: 180px;
+  gap: 1em;
+}
+
+.history > .previous {
+  overflow-y: auto;
+}
+
+.history > .previous > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  padding: 0.5em 0;
+  font-size: 24px;
+  border-bottom: 1px solid;
+}
+
+.history > .previous > span:hover i {
+  display: block;
+}
+
+.history > .previous > span > small {
+  opacity: 0.6;
+}
+
+.history > .previous > span > i {
+  display: none;
+  position: absolute;
+  color: red;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.history > .clearHistory {
+  font-size: 20px;
+  background: #1d87f1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.history > .clearHistory:hover {
+  background-color: #1971c9;
+}
+
+.calculator {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100px auto;
+      grid-template-rows: 100px auto;
+  height: 500px;
+  width: 340px;
+  border-radius: 8px;
+  background-color: #747e88;
+  overflow: hidden;
+  border: 1px solid #132a3f;
+}
+
+.calculator > input.answer {
+  width: 294px;
+  padding: 0 0.5em;
+  text-align: right;
+  font-size: 48px;
+  font-weight: 400;
+  color: white;
+}
+
+.calculator > input.answer::-webkit-input-placeholder {
+  color: white;
+}
+
+.calculator > input.answer:-ms-input-placeholder {
+  color: white;
+}
+
+.calculator > input.answer::-ms-input-placeholder {
+  color: white;
+}
+
+.calculator > input.answer::placeholder {
+  color: white;
+}
+
+.calculator > .buttonGrid {
+  display: -ms-grid;
+  display: grid;
+  width: inherit;
+  -ms-grid-columns: 24.5% 24.5% 24.5% 24.5%;
+      grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
+  gap: 0.6%;
+  background: #667581;
+}
+
+.calculator > .buttonGrid > button {
+  font-size: 28px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.calculator > .buttonGrid > button:active {
+  opacity: 0.8;
+}
+
+.calculator > .buttonGrid > button.controlBtn {
+  background: #b6bec5;
+  font-size: 24px;
+}
+
+.calculator > .buttonGrid > button.actionBtn {
+  background: #f2a13c;
+  color: white;
+  font-size: 32px;
+}
+
+button, input {
+  border: none;
+}
+/*# sourceMappingURL=style.css.map */
